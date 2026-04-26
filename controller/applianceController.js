@@ -7,9 +7,9 @@ import {
   updateAppliance,
   deleteAppliance,
   slugExists,
-} from "../queries/applianceQueries.js";
-import { getBrandById } from "../queries/brandQueries.js";
-import { getCategoryById } from "../queries/categoryQueries.js";
+} from "../queries/queryAppliance.js";
+import { getBrandById } from "../queries/queryBrand.js";
+import { getCategoryById } from "../queries/queryCategory.js";
 
 export const listAppliances = async (req, res) => {
   try {
