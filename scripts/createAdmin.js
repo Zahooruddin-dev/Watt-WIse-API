@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
-import { createClient } from "pg";
+import pg from "pg";
+const { Client } = pg;
 import readline from "readline";
 
 dotenv.config();
@@ -10,7 +11,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
 const ask = (question) => new Promise((resolve) => rl.question(question, resolve));
 
 const run = async () => {
-  const client = new createClient({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
+  const client = new Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
   await client.connect();
 
   const username = await ask("Enter admin username: ");
