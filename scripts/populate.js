@@ -10,8 +10,6 @@ const pool = new Pool({
 });
 
 // ─── CATEGORIES ───────────────────────────────────────────────────────────────
-// Includes the original 20 from seed.js + 13 new ones.
-// ON CONFLICT DO UPDATE so re-running is safe.
 const categories = [
 	// ── Fans ──
 	{
