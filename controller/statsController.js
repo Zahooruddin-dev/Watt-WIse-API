@@ -3,7 +3,7 @@ import {
   getStatsByCategory,
   getStatsByBrand,
   getMostEfficientAppliances,
-} from "../qureies/queryStats";
+} from "../queries/queryStats.js";
 
 export const overview = async (req, res) => {
   try {

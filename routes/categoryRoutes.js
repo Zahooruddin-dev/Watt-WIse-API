@@ -5,7 +5,7 @@ import {
   addCategory,
   editCategory,
   removeCategory,
-} from "../controllers/categoryController.js";
+} from "../controller/categoryController.js";
 import {
   createCategoryValidation,
   updateCategoryValidation,

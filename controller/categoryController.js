@@ -7,7 +7,7 @@ import {
   updateCategory,
   deleteCategory,
   categoryHasAppliances,
-} from "../queries/categoryQueries.js";
+} from "../queries/queryCategory.js";
 
 export const listCategories = async (req, res) => {
   try {

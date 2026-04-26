@@ -5,7 +5,7 @@ import {
   addBrand,
   editBrand,
   removeBrand,
-} from "../controllers/brandController.js";
+} from "../controller/brandController.js";
 import {
   createBrandValidation,
   updateBrandValidation,

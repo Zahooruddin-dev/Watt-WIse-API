@@ -7,7 +7,7 @@ import {
   updateBrand,
   deleteBrand,
   brandHasAppliances,
-} from "../queries/brandQueries.js";
+} from "../queries/queryBrand.js";
 
 export const listBrands = async (req, res) => {
   try {

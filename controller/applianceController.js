@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator";
-import { findAdminByUsername } from "../queries/adminQueries.js";
+import { findAdminByUsername } from "../queries/queryAdmin.js";
 
 export const login = async (req, res) => {
   const errors = validationResult(req);

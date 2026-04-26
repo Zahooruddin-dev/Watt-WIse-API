@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
     name: "WattWise PK API",
     version: "1.0.0",
     description: "Open source Pakistani appliance wattage and pricing data",
-    docs: "https://github.com/your-username/wattwise-pk#readme",
+    docs: "https://github.com/Zahooruddin-dev/Watt-WIse-API#readme",
     endpoints: {
       auth: "/api/auth",
       appliances: "/api/appliances",

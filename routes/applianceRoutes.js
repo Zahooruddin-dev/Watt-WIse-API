@@ -5,7 +5,7 @@ import {
   addAppliance,
   editAppliance,
   removeAppliance,
-} from "../controllers/applianceController.js";
+} from "../controller/applianceController.js";
 import {
   createApplianceValidation,
   updateApplianceValidation,

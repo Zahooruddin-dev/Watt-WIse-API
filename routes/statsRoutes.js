@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { overview, byCategory, byBrand, mostEfficient } from "../controllers/statsController.js";
+import { overview, byCategory, byBrand, mostEfficient } from "../controller/statsController.js";
 
 const router = Router();
 
