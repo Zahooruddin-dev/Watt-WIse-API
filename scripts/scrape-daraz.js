@@ -170,7 +170,7 @@ async function scrapeCategory(searchKeyword, maxProducts = 100) {
 	// Get product links from search results
 	const productLinks = await page.$$eval(
 		'a[data-qa="product-name"]',
-		(links, max) => links.map((a) => a.href).slice(0, max), 
+		(links, max) => links.map((a) => a.href).slice(0, max),
 		maxProducts, // passed as the third argument to $$eval
 	);
 
