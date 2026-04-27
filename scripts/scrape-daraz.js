@@ -71,15 +71,21 @@ async function getBrandId(brandName) {
 }
 
 const categoryKeywords = {
-	'ceiling-fans': ['ceiling fan'],
-	'pedestal-fans': ['pedestal fan', 'stand fan'],
-	'table-fans': ['table fan', 'desk fan'],
-	'exhaust-fans': ['exhaust fan'],
-	'air-conditioners': ['air conditioner', ' ac ', 'inverter ac'],
-	refrigerators: ['refrigerator', 'fridge'],
+	'ceiling-fans':     ['ceiling fan'],
+	'pedestal-fans':    ['pedestal fan', 'stand fan'],
+	'table-fans':       ['table fan', 'desk fan'],
+	'exhaust-fans':     ['exhaust fan', 'ventilation fan'],
+	'wall-fans':        ['wall fan', 'bracket fan'],
+	'air-conditioners': ['air conditioner', 'inverter ac', ' ac '],
+	'air-coolers':      ['air cooler', 'room cooler'],
+	refrigerators:      ['refrigerator', 'fridge'],
 	'washing-machines': ['washing machine', 'washer'],
-	'microwave-ovens': ['microwave'],
+	'microwave-ovens':  ['microwave'],
 	'electric-kettles': ['kettle'],
+	'electric-irons':   ['steam iron', 'dry iron', 'electric iron'],
+	'water-pumps':      ['water pump', 'motor pump'],
+	'water-heaters':    ['geyser', 'water heater'],
+	'led-tvs':          ['smart tv', 'led tv', 'qled'],
 };
 
 async function getCategoryId(productName) {
@@ -336,7 +342,7 @@ async function saveProducts(products) {
 			continue;
 		}
 
-		// Brand is optional — save even without it
+		// Brand is optional — fall back to Generic
 		const brandId = await getBrandId(prod.brand || 'Generic').catch(() => null);
 
 		const slug = generateSlug(prod.name, prod.brand, prod.wattage);
@@ -344,13 +350,24 @@ async function saveProducts(products) {
 		const res = await pool
 			.query(
 				`INSERT INTO appliances
-          (name, slug, brand_id, category_id, watts, price_pkr, voltage, frequency_hz, source_url, last_scraped)
-         VALUES ($1,$2,$3,$4,$5,$6,220,50,$7,NOW())
+          (name, slug, brand_id, category_id, watts, price_pkr,
+           voltage, frequency_hz, is_inverter, description)
+         VALUES ($1, $2, $3, $4, $5, $6, 220, 50, false, $7)
          ON CONFLICT (slug) DO UPDATE
            SET price_pkr = EXCLUDED.price_pkr,
-               last_scraped = NOW()
+               watts     = COALESCE(EXCLUDED.watts, appliances.watts)
          RETURNING id`,
-				[prod.name, slug, brandId, categoryId, prod.wattage, prod.price, prod.url],
+				[
+					prod.name,
+					slug,
+					brandId,
+					categoryId,
+					prod.wattage,   // nullable — schema allows it
+					prod.price,
+					prod.url        // stored in description since source_url doesn't exist
+						? `Scraped from: ${prod.url}`
+						: null,
+				],
 			)
 			.catch((err) => {
 				console.log(`  ❌ DB error for "${prod.name.slice(0, 40)}": ${err.message}`);
