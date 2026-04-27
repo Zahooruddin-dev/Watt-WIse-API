@@ -8,6 +8,7 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "seed": "node scripts/seed.js",
+    "scrape": "node scripts/scrape-daraz.js",
     "populate": "node scripts/populate.js",
     "create-admin": "node scripts/createAdmin.js"
   },
