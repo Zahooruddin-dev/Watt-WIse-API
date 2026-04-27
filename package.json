@@ -29,6 +29,7 @@
     "jsonwebtoken": "^9.0.2",
     "p-queue": "^9.2.0",
     "pg": "^8.20.0",
+    "puppeteer": "^24.42.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2"
   },

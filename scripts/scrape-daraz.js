@@ -168,10 +168,11 @@ async function scrapeCategory(searchKeyword, maxProducts = 100) {
 	await page.goto(searchUrl, { waitUntil: 'networkidle2' });
 
 	// Get product links from search results
-	const productLinks = await page.$$eval('a[data-qa="product-name"]', (links) =>
-		links.map((a) => a.href).slice(0, maxProducts),
+	const productLinks = await page.$$eval(
+		'a[data-qa="product-name"]',
+		(links, max) => links.map((a) => a.href).slice(0, max), 
+		maxProducts, // passed as the third argument to $$eval
 	);
-	await browser.close();
 
 	// Process products with concurrency limit (3 at a time)
 	const queue = new PQueue({ concurrency: 3 });
